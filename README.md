@@ -1,16 +1,39 @@
-# React + Vite
+# Net Link Planner
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This Vite + React app helps network technicians model up to two switches, pair their ports, and print a physical label for the connection using an Xprinter XP-460B thermal label printer.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Create and remove up to two switch/device cards with custom metadata.
+- Select two ports to propose a link, commit the link, and keep a history of committed pairs.
+- Persist devices and links to `localStorage` so the UI survives refreshes.
+- One-click printing flow that isolates the "Committed links" card on a 100 mm × 150 mm label layout tailored to the XP-460B.
 
-## React Compiler
+## Getting started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm install
+npm run dev
+```
 
-## Expanding the ESLint configuration
+- `npm run dev` – start the Vite dev server with HMR.
+- `npm run build` – generate a production build in `dist/`.
+- `npm run preview` – serve the production build locally.
+- `npm run lint` – run ESLint over the project.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Usage
+
+1. Click **Insert device** to add a switch, name it, and configure ports/order.
+2. Select ports on each device; once two ports are selected, either undo or commit the link.
+3. Review committed links in the summary card.
+4. Press **Print label** to open the browser print dialog with only the committed links content visible.
+
+### Printing on the XP-460B
+
+The stylesheet includes a print media query that:
+
+- Sets the page size to 100 mm × 150 mm (4"×6") with 4 mm margins.
+- Hides the rest of the UI so the label only shows the committed links.
+- Repositions the card to fill the printable page.
+
+In the system print dialog select the **Xprinter XP-460B**, make sure the page size matches 100 mm × 150 mm, and confirm the print.
