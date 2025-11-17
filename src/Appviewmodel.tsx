@@ -73,10 +73,15 @@ export function useAppViewModel(defaultDevices: DeviceModel[]) {
     },
 
     updateForm: (name: string, value: string | number) => {
-      setFormState((prev: any) => ({
-        ...prev,
-        [name]: name === "nbrPort" ? Number(value) : value,
-      }));
+      setFormState((prev) =>
+        ({
+          ...prev,
+          [name]:
+            name === "nbrPort"
+              ? Math.max(1, Number(value))
+              : value,
+        }) as DeviceProps
+      );
     },
 
     addDevice: () => {
